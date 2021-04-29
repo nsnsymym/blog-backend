@@ -11,8 +11,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using BlogBackend.Models;
+using BlogBackend.Data;
 
-namespace blog_backend
+namespace BlogBackend
 {
     public class Startup
     {
@@ -27,10 +30,14 @@ namespace blog_backend
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddDbContext<BlogContext>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("BlogContext"));
+            });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "blog_backend", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlogContext", Version = "v1" });
             });
         }
 
@@ -41,7 +48,7 @@ namespace blog_backend
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "blog_backend v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogContext v1"));
             }
 
             app.UseHttpsRedirection();
