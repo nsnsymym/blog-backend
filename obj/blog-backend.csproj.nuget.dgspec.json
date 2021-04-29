@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nishiyama/Practices/MyBlogSystem/blog-backend/blog-backend.csproj": {}
+    "/Users/nishiyama/Practice/MyBlogSystem/blog-backend/blog-backend.csproj": {}
   },
   "projects": {
-    "/Users/nishiyama/Practices/MyBlogSystem/blog-backend/blog-backend.csproj": {
+    "/Users/nishiyama/Practice/MyBlogSystem/blog-backend/blog-backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nishiyama/Practices/MyBlogSystem/blog-backend/blog-backend.csproj",
+        "projectUniqueName": "/Users/nishiyama/Practice/MyBlogSystem/blog-backend/blog-backend.csproj",
         "projectName": "blog-backend",
-        "projectPath": "/Users/nishiyama/Practices/MyBlogSystem/blog-backend/blog-backend.csproj",
+        "projectPath": "/Users/nishiyama/Practice/MyBlogSystem/blog-backend/blog-backend.csproj",
         "packagesPath": "/Users/nishiyama/.nuget/packages/",
-        "outputPath": "/Users/nishiyama/Practices/MyBlogSystem/blog-backend/obj/",
+        "outputPath": "/Users/nishiyama/Practice/MyBlogSystem/blog-backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/nishiyama/.config/NuGet/NuGet.Config"
@@ -24,6 +24,7 @@
         },
         "frameworks": {
           "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -35,6 +36,7 @@
       },
       "frameworks": {
         "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -50,12 +52,48 @@
                 "NU1605"
               ]
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.5.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.1.3, )"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
         }
       }
     }

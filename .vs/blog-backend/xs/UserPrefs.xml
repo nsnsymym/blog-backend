@@ -1,46 +1,40 @@
 ﻿<Properties StartupConfiguration="{9B5174E6-2532-431F-BA15-14B9604E1196}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Tag.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Article.cs">
     <Files>
-      <File FileName="Models/Article.cs" Line="1" Column="1" />
-      <File FileName="Models/Admin.cs" Line="11" Column="1" />
-      <File FileName="Models/Comment.cs" Line="1" Column="1" />
-      <File FileName="Models/Tag.cs" Line="1" Column="1" />
-      <File FileName="Models/ArticleTag.cs" Line="7" Column="10" />
-      <File FileName="Controllers/ArticleController.cs" Line="11" Column="32" />
-      <File FileName="Controllers/CommentController.cs" Line="1" Column="1" />
-      <File FileName="Controllers/AdminController.cs" Line="1" Column="1" />
-      <File FileName="Controllers/TagController.cs" Line="21" Column="28" />
-      <File FileName="Startup.cs" Line="1" Column="1" />
+      <File FileName="Models/Article.cs" Line="22" Column="43" />
+      <File FileName="Models/Admin.cs" Line="10" Column="9" />
+      <File FileName="Models/Tag.cs" Line="2" Column="22" />
+      <File FileName="Models/ArticleTag.cs" Line="12" Column="39" />
+      <File FileName="Controllers/ArticleController.cs" />
+      <File FileName="Controllers/CommentController.cs" />
+      <File FileName="Controllers/AdminController.cs" />
+      <File FileName="Controllers/TagController.cs" />
+      <File FileName="Startup.cs" Line="31" Column="10" />
       <File FileName="Program.cs" Line="1" Column="1" />
       <File FileName="Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="docker-compose.yml" Line="10" Column="14" />
+      <File FileName="Data/BlogDbContext.cs" Line="5" Column="22" />
+      <File FileName="appsettings.json" Line="12" Column="4" />
+      <File FileName="appsettings.Development.json" Line="12" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="blog-backend" expanded="True">
             <Node name="blog-backend" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True">
-                  <Node name="Swashbuckle.AspNetCore" expanded="True">
-                    <Node name="Swashbuckle.AspNetCore.Swagger" expanded="True" />
-                    <Node name="Swashbuckle.AspNetCore.SwaggerGen" expanded="True">
-                      <Node name="Swashbuckle.AspNetCore.Swagger" expanded="True" />
-                    </Node>
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
               <Node name="Models" expanded="True">
-                <Node name="Tag.cs" selected="True" />
+                <Node name="Article.cs" selected="True" />
               </Node>
               <Node name="Properties" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.blog-backend PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.ItemProperties.blog-backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
