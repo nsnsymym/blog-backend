@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using BlogBackend.Models;
 using System.Net.Mime;
 using BlogBackend.Utils;
-using BlogBackend.Data.Requests;
 using System.Threading.Tasks;
 using BlogBackend.Data;
 using Microsoft.EntityFrameworkCore;
@@ -26,14 +25,14 @@ namespace BlogBackend.Controllers
 
         // GET: api/Admins
         [HttpGet]
-        public async Task<ActionResult<List<Admin>>> GetAll()
+        public async Task<ActionResult<List<Admin>>> GetAllAsync()
         {
             return await _context.Admins.ToListAsync();
         }
-
+        
         // GET api/Admins/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Admin>> Get(int id)
+        public async Task<ActionResult<Admin>> GetAsync(int id)
         {
             var admin = await _context.Admins.FindAsync(id);
 
@@ -47,18 +46,17 @@ namespace BlogBackend.Controllers
 
         // POST api/Admins
         [HttpPost]
-        [Route("api/admin")]
-        public async Task<ActionResult<Admin>> Post([FromBody] Admin admin)
+        public async Task<ActionResult<Admin>> PostAsync([FromBody] Admin admin)
         {
             _context.Admins.Add(admin);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAdmin", new { id = admin.Id }, admin);
+            return CreatedAtAction(nameof(GetAsync), new { id = admin.Id }, admin);
         }
 
         // PUT api/Admins/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Admin admin)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] Admin admin)
         {
             if (id != admin.Id)
             {
@@ -88,7 +86,7 @@ namespace BlogBackend.Controllers
 
         // DELETE api/Admins/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Admin>> Delete(int id)
+        public async Task<ActionResult<Admin>> DeleteAsync(int id)
         {
             var admin = await _context.Admins.FindAsync(id);
             if (admin == null)
