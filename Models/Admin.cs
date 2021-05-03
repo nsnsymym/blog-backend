@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogBackend.Models
 {
-    public class Admin
+    public class Admin : BaseModel
     {
         public Admin()
         {

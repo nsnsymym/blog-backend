@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogBackend.Models
 {
-    public class ArticleTag
+    public class ArticleTag : BaseModel
     {
         public ArticleTag()
         {

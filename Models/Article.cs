@@ -9,7 +9,7 @@ namespace BlogBackend.Models
         Published,
     }
 
-    public class Article
+    public class Article : BaseModel
     {
         public Article()
         {
@@ -23,10 +23,6 @@ namespace BlogBackend.Models
         public string Contents { get; set; }
         [Required]
         public Status Status { get; set; }
-        [Required]
-        public DateTime CreatedAt { get; set; }
-        [Required]
-        public DateTime UpdatedAt { get; set; }
         public int Like { get; set; }
         public int View { get; set; }
     }
