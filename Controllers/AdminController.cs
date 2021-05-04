@@ -12,8 +12,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogBackend.Controllers
 {
+    [ApiController]
     [Produces(MediaTypeNames.Application.Json)]
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AdminController : Controller
     {
         private readonly BlogContext _context;
