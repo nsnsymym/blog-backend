@@ -7,6 +7,7 @@ using BlogBackend.Utils;
 using System.Threading.Tasks;
 using BlogBackend.Data;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,7 +35,7 @@ namespace BlogBackend.Controllers
         
         // GET api/Admins/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Admin>> GetAsync(int id)
+        public async Task<ActionResult<Admin>> GetAsync(Guid id)
         {
             var admin = await _context.Admins.FindAsync(id);
 
@@ -55,6 +56,7 @@ namespace BlogBackend.Controllers
                 // パスワードのハッシュ化
                 admin.Password = PasswordHasher.HashPassword(admin.Password);
             }
+            // TODO: アイコン画像保存処理
 
             _context.Admins.Add(admin);
             await _context.SaveChangesAsync();
@@ -64,15 +66,20 @@ namespace BlogBackend.Controllers
 
         // PUT api/Admins/5
         [HttpPut("{id}")]
-        public async Task<ActionResult<Admin>> PutAsync(int id, [Bind("Id, UserName,Password,Icon,Twitter,Github")] Admin admin)
+        public async Task<ActionResult<Admin>> PutAsync(Guid id, [Bind("Id, UserName,Password,Icon,Twitter,Github")] Admin admin)
         {
             if (id != admin.Id)
             {
                 return BadRequest();
             }
 
-            // パスワードのハッシュ化
-            admin.Password = PasswordHasher.HashPassword(admin.Password);
+            if (admin.Password.Length > 0)
+            {
+                // パスワードのハッシュ化
+                admin.Password = PasswordHasher.HashPassword(admin.Password);
+            }
+
+            // TODO: アイコン画像削除/保存処理
 
             _context.Entry(admin).State = EntityState.Modified;
 
@@ -97,7 +104,7 @@ namespace BlogBackend.Controllers
 
         // DELETE api/Admins/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Admin>> DeleteAsync(int id)
+        public async Task<ActionResult<Admin>> DeleteAsync(Guid id)
         {
             var admin = await _context.Admins.FindAsync(id);
             if (admin == null)
@@ -108,11 +115,13 @@ namespace BlogBackend.Controllers
             _context.Admins.Remove(admin);
             await _context.SaveChangesAsync();
 
+            // TODO: アイコン画像削除処理
+
             return admin;
 
         }
 
-        private bool AdminExists(int id)
+        private bool AdminExists(Guid id)
         {
             return _context.Admins.Any(e => e.Id == id);
         }
