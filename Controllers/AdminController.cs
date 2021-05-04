@@ -48,8 +48,14 @@ namespace BlogBackend.Controllers
 
         // POST api/Admins
         [HttpPost]
-        public async Task<ActionResult<Admin>> PostAsync([FromBody] Admin admin)
+        public async Task<ActionResult<Admin>> PostAsync([Bind("Id, UserName,Password,Icon,Twitter,Github")] Admin admin)
         {
+            if (admin.Password.Length > 0)
+            {
+                // パスワードのハッシュ化
+                admin.Password = PasswordHasher.HashPassword(admin.Password);
+            }
+
             _context.Admins.Add(admin);
             await _context.SaveChangesAsync();
 
@@ -58,12 +64,15 @@ namespace BlogBackend.Controllers
 
         // PUT api/Admins/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] Admin admin)
+        public async Task<ActionResult<Admin>> PutAsync(int id, [Bind("Id, UserName,Password,Icon,Twitter,Github")] Admin admin)
         {
             if (id != admin.Id)
             {
                 return BadRequest();
             }
+
+            // パスワードのハッシュ化
+            admin.Password = PasswordHasher.HashPassword(admin.Password);
 
             _context.Entry(admin).State = EntityState.Modified;
 
