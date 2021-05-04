@@ -7,6 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogBackend.Data
 {
+    /*
+     * Modelを変更した後のコマンド
+     * dotnet ef migrations add MigrationName
+     * dotnet ef database update
+     */
     public class BlogContext : DbContext
     {
         public BlogContext(DbContextOptions<BlogContext> options)
@@ -50,6 +55,15 @@ namespace BlogBackend.Data
                 }
                 ((BaseModel)entity.Entity).UpdatedAt = now;
             }
+        }
+
+        // PKのUUIDの設定
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasPostgresExtension("uuid-ossp");
+            modelBuilder.Entity<BaseModel>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
         }
     }
 }

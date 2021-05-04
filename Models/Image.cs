@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogBackend.Models
 {
-    public class Tag : BaseModel
+    public class Image : BaseModel
     {
-        [Display(Name = "タグ名")]
+        [Display(Name = "ファイル名")]
         [Required]
         public string Name { get; set; }
 
-        public List<ArticleTag> ArticleTags { get; set; }
+        public List<ArticleImage> ArticleImages { get; set; }
     }
 }

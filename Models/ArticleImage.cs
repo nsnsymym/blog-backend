@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogBackend.Models
 {
-    public class ArticleTag : BaseModel
+    public class ArticleImage : BaseModel
     {
         [Required]
         public Guid ArticleId { get; set; }
@@ -11,8 +11,8 @@ namespace BlogBackend.Models
         public Article Article { get; set; }
 
         [Required]
-        public Guid TagId { get; set; }
+        public Guid ImageId { get; set; }
 
-        public Tag Tag { get; set; }
+        public Image Image { get; set; }
     }
 }

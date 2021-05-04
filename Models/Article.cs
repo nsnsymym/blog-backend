@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BlogBackend.Models
 {
-    public enum Status
+    public enum ArticleStatus
     {
         Unpublished,
         Published,
@@ -11,19 +12,29 @@ namespace BlogBackend.Models
 
     public class Article : BaseModel
     {
-        public Article()
-        {
-        }
-
-        public int Id { get; set; }
+        [Display(Name = "タイトル")]
         [Required]
-        [StringLength(50, ErrorMessage = "タイトルは50文字までです。")]
+        [StringLength(80, ErrorMessage = "{0}は{1}文字までです。")]
         public string Title { get; set; }
+
+        [Display(Name = "本文")]
         [Required]
         public string Contents { get; set; }
+
+        [Display(Name = "状態")]
         [Required]
-        public Status Status { get; set; }
-        public int Like { get; set; }
-        public int View { get; set; }
+        public ArticleStatus Status { get; set; }
+
+        [Display(Name = "いいね")]
+        public int LikeCount { get; set; }
+
+        [Display(Name = "投稿者")]
+        [Required]
+        public Guid AdminId { get; set; }
+
+        public Admin Admin { get; set; }
+
+        public List<ArticleTag> ArticleTags { get; set; }
+        public List<ArticleImage> ArticleImages { get; set; }
     }
 }
