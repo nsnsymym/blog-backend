@@ -36,6 +36,10 @@ namespace BlogBackend.Controllers
             _context = context;
         }
 
+        // TODO: 画像サイズのFilterによるバリデーション追加
+        // https://docs.microsoft.com/ja-jp/aspnet/core/mvc/models/file-uploads?view=aspnetcore-5.0
+        // https://garafu.blogspot.com/2013/11/aspnet-web-api_2.html
+
 
         // POST api/Images
         [HttpPost]
