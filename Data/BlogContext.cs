@@ -24,6 +24,34 @@ namespace BlogBackend.Data
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleTag> ArticleTags { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<ArticleImage> ArticleImages { get; set; }
+        public DbSet<Image> Images { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // PKのUUIDの設定
+            modelBuilder.HasPostgresExtension("uuid-ossp");
+
+            // 各ModelのEntityの定義とUUIDをセット
+            modelBuilder.Entity<Admin>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
+            modelBuilder.Entity<Article>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
+            modelBuilder.Entity<ArticleTag>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
+            modelBuilder.Entity<Tag>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
+            modelBuilder.Entity<ArticleImage>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
+            modelBuilder.Entity<Image>()
+                        .Property(e => e.Id)
+                        .HasDefaultValueSql("uuid_generate_v4()");
+        }
 
         // タイムスタンプの書き込み(同期処理)
         public override int SaveChanges()
@@ -55,15 +83,6 @@ namespace BlogBackend.Data
                 }
                 ((BaseModel)entity.Entity).UpdatedAt = now;
             }
-        }
-
-        // PKのUUIDの設定
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.HasPostgresExtension("uuid-ossp");
-            modelBuilder.Entity<BaseModel>()
-                        .Property(e => e.Id)
-                        .HasDefaultValueSql("uuid_generate_v4()");
         }
     }
 }
