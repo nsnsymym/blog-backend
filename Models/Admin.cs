@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,5 +25,7 @@ namespace BlogBackend.Models
 
         [Display(Name = "GithubID")]
         public string Github { get; set; }
+
+        public List<Article> Articles { get; set; }
     }
 }

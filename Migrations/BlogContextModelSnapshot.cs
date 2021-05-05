@@ -197,7 +197,7 @@ namespace BlogBackend.Migrations
             modelBuilder.Entity("BlogBackend.Models.Article", b =>
                 {
                     b.HasOne("BlogBackend.Models.Admin", "Admin")
-                        .WithMany()
+                        .WithMany("Articles")
                         .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -241,6 +241,11 @@ namespace BlogBackend.Migrations
                     b.Navigation("Article");
 
                     b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("BlogBackend.Models.Admin", b =>
+                {
+                    b.Navigation("Articles");
                 });
 
             modelBuilder.Entity("BlogBackend.Models.Article", b =>
