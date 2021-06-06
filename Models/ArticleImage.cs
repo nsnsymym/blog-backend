@@ -13,6 +13,6 @@ namespace BlogBackend.Models
         [Required]
         public Guid ImageId { get; set; }
 
-        public Image Image { get; set; }
+        public string Image { get; set; }
     }
 }

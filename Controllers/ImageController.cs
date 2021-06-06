@@ -25,15 +25,15 @@ namespace BlogBackend.Controllers
     {
         private readonly BlogContext _context;
         private readonly long _fileSizeLimit;
-        private readonly string _directory;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private Image image;
         private string filePath;
 
-        public ImageController(IConfiguration config, IWebHostEnvironment environment, BlogContext context)
+        public ImageController(IConfiguration config, IWebHostEnvironment hostingEnvironment, BlogContext context)
         {
             _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
-            _directory = config.GetValue<string>("StoredFilesPath");
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // TODO: 画像サイズのFilterによるバリデーション追加
@@ -45,38 +45,42 @@ namespace BlogBackend.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadIconFilesAsync(IFormFile file)
         {
-            long size = file.Length;
-            if (size > 0)
+            List<string> PermittedFileTypes = new List<string> {
+                "image/jpeg",
+                "image/png",
+            };
+
+            if (file != null && file.Length > 0)
             {
-                
-                filePath = Path.Combine(_directory, Path.GetRandomFileName());
+                if (!PermittedFileTypes.Contains(file.ContentType))
+                {
+                    // TODO: ファイルタイプが違う時の失敗の処理をかく
+                }
+
+                string fileName = Path.GetFileName(file.FileName);
+                fileName = $@"{Guid.NewGuid()}{Path.GetExtension(fileName)}";
+                string contentRootPath = _hostingEnvironment.ContentRootPath;
+                // TODO: 保存先のパスをユーザーごとにディレクトリを分ける
+                string filePath = contentRootPath + "/images/" + fileName;
 
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await file.CopyToAsync(stream);
                 }
 
-                //var uploads = Path.Combine(hostingEnvironment.WebRootPath, "images");
-                //var fullPath = Path.Combine(uploads, GetUniqueFileName(file.FileName));
-                //file.CopyTo(new FileStream(fullPath, FileMode.Create));
+                Image image = new Image();
                 image.Name = filePath;
+
+                _context.Images.Add(image);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { fileName });
             }
-
-
-            _context.Images.Add(image);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { size });
-        }
-
-        private string GetUniqueFileName(string fileName)
-        {
-            fileName = Path.GetFileName(fileName);
-
-            return Path.GetFileNameWithoutExtension(fileName)
-                + "_"
-                + Guid.NewGuid().ToString().Substring(0, 4)
-                + Path.GetExtension(fileName);
+            else
+            {
+                string result = "ファイルアップロードに失敗しました";
+                return NotFound(new { result });
+            }   
         }
     }
 }
